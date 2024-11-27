@@ -1,29 +1,59 @@
+"use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Nav() {
+  const [Menu, SetMenu] = useState(false);
+  const toggleMenu = () => {
+    SetMenu(!Menu);
+  };
+
   return (
-    <div className="flex justify-between w-[1120px] h-[35px] mt-[72px] pl-[160px]">
-      <div className="w-[67.46px] h-[23px] pt-[2px] text-5xl font-semibold">
+    <div className="flex justify-between w-full lg:px-[220px]  px-4 mt-10 lg:mt-[102px]">
+      <div className="text-5xl font-semibold">
         <h1>wa.</h1>
       </div>
 
-      <div className="flex">
-        <ul className="flex gap-8 w-[384.91px] h-[20px] pt-[13px] ml-[735.09px]">
-          <li className="w-[50px] h-[25px] font-dm-sans text-[21px] font-medium leading-[25.2px] tracking-[-0.03em] text-left">
+      <div className="flex items-center">
+        <ul className="hidden md:flex gap-8">
+          <li className="text-lg font-medium">
             <Link href="/">Work</Link>
           </li>
-          <li className="w-[59px] h-[25px] font-dm-sans text-[21px] font-medium leading-[25.2px] tracking-[-0.03em] text-left">
+          <li className="text-lg font-medium">
             <Link href="/about">About</Link>
           </li>
-          <li className="w-[105px] h-[25px] font-dm-sans text-[21px] font-medium leading-[25.2px] tracking-[-0.03em] text-left">
+          <li className="text-lg font-medium">
             <Link href="#">Playground</Link>
           </li>
-          <li className="w-[78px] h-[25px] font-dm-sans text-[21px] font-medium leading-[25.2px] tracking-[-0.03em] text-left">
+          <li className="text-lg font-medium">
             <Link href="#">Contact</Link>
           </li>
         </ul>
+
+        <div className="md:hidden text-black" onClick={toggleMenu}>
+          {Menu ? <FaTimes size={30} /> : <FaBars size={30} />}
+        </div>
       </div>
+
+      {Menu && (
+        <div className="bg-black text-center text-white space-y-4 absolute  right-24 w-full h-full p-5">
+          <ul>
+            <li className="text-2xl py-2">
+              <Link href="/about">About</Link>
+            </li>
+            <li className="text-2xl py-2">
+              <Link href="/">Work</Link>
+            </li>
+            <li className="text-2xl py-2">
+              <Link href="/">Playground</Link>
+            </li>
+            <li className="text-2xl py-2">
+              <Link href="/about">Contact</Link>
+            </li>
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
